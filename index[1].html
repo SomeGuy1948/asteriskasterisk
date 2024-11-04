@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic String Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 8px; margin-top: 5px; }
+    button { padding: 10px 20px; margin-top: 15px; }
+    .result { margin-top: 20px; padding: 15px; background: #f3f3f3; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Dynamic String Generator</h1>
+  
+  <label>Name:</label>
+  <input type="text" id="name" placeholder="Enter text">
+
+  <label>Age:</label>
+  <input type="text" id="age" placeholder="Enter text">
+
+  <label>Gender:</label>
+  <input type="text" id="gender" placeholder="Enter text">
+
+  <label>Species:</label>
+  <input type="text" id="species" placeholder="Enter text">
+
+  <label>Figure:</label>
+  <input type="text" id="figure" placeholder="Enter text">
+
+  <label>Appearance:</label>
+  <input type="text" id="appearance" placeholder="Enter text">
+
+  <label>Likes:</label>
+  <input type="text" id="likes" placeholder="Enter text">
+
+  <label>Dislikes:</label>
+  <input type="text" id="dislikes" placeholder="Enter text">
+
+  <label>Personality:</label>
+  <input type="text" id="personality" placeholder="Enter text">
+
+  <label>Attributes:</label>
+  <input type="text" id="attributes" placeholder="Enter text">
+
+  <button onclick="generateString()">Generate String</button>
+
+  <div class="result" id="result">
+    <strong>Output:</strong>
+    <pre id="outputString"></pre>
+  </div>
+</div>
+
+<script>
+function generateString() {
+  // Collect input values with specific IDs
+  const inputs = {
+    Name: document.getElementById('name').value,
+    Age: document.getElementById('age').value,
+    Gender: document.getElementById('gender').value,
+    Species: document.getElementById('species').value,
+    Figure: document.getElementById('figure').value,
+    Appearance: document.getElementById('appearance').value,
+    Likes: document.getElementById('likes').value,
+    Dislikes: document.getElementById('dislikes').value,
+    Personality: document.getElementById('personality').value,
+    Attributes: document.getElementById('attributes').value
+  };
+
+  // Array to hold formatted non-empty inputs
+  const inputArray = [];
+
+  // Loop through each input and process if not empty
+  for (const [key, value] of Object.entries(inputs)) {
+    if (value) {
+      // Split the value by commas and trim each part
+      const values = value.split(',').map(val => `"${val.trim()}"`);
+      // Format as {Key: "value1" + "value2" + ...}
+      const formattedInput = `{${key}: ${values.join(' + ')}}`;
+      inputArray.push(formattedInput);
+    }
+  }
+
+  // Generate the output string in the specified format
+  const outputString = `[Character\n${inputArray.join('\n')}\n]`;
+
+  // Display the output
+  document.getElementById('outputString').textContent = outputString;
+}
+</script>
+
+</body>
+</html>
